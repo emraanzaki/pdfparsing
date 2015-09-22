@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	<div id="success" class="hidden" style="text-align: center;font-size: 20px;margin-top: 30px;">
+		<div style='margin: 30px;' class="alert alert-success"></div>
+	</div>
+	<form action="" method="post" id="pdfDropzone" class="dropzone"></form>
+	<h3 style="max-width: 760px; margin: 0 auto 20px;">History</h3>
+
+	<ul class="list-group" style="max-width: 760px; margin: 0 auto;">
+		{% for key, file in files %}
+			<li class='list-group-item'>
+				<a href='pages/{{key}}' class='pull-right glyphicon glyphicon-search' aria-hidden='true'></a> 
+				<a href='{{base_url()}}/uploads/{{file}}'>{{file}}</a>
+			</li>
+		{% endfor %}
+	</ul>
+{% endblock %} 
+
+
+
+
+
+
+
+

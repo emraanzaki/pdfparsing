@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ filename }}{% endblock %}
+{% block body %}
+<div class="container" style="margin-top: 60px;margin-bottom: 60px;">
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">
+					<span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+					Page {{pageno}} - {{filename}}
+				</a>
+			</div>
+		</div>
+	</nav>
+	<div class="row">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Layer / Group Name</h3>
+			</div>
+			
+			<div class="panel-body">
+				{% for key,element in data %}
+					{% if key == 'images' %}
+						{% for id,image in element %}
+							<div class="media">
+								<div class="media-left media-middle">
+									<img class="media-object" width="160" height="160" src="{{base_url()}}/uploads/images/{{image}}">
+								</div>
+								<div class="media-body">
+									<h3 class="media-heading">{{image}}</h3>
+									<div class="row" style="min-width: 500px;">
+										<div class="col-xs-3"><h4><abbr title="Element Coordinates on the X Axis">x</abbr> <small>N/a</small></h4></div>
+										<div class="col-xs-3"><h4><abbr title="Element Coordinates on the Y Axis">y</abbr> <small>N/a</small></h4></div>
+										<div class="col-xs-3"><h4><abbr title="Element Width">w</abbr> <small>{{imagesize(image, 'width')}}</small></h4></div>
+										<div class="col-xs-3"><h4><abbr title="Element Height">h</abbr> <small>{{imagesize(image, 'height')}}</small></h4></div>
+									</div>
+									<div class="row" style="min-width: 500px;">
+										<div class="col-xs-3"><h4><abbr title="Image format (eg. JPEG, PNG)">Format</abbr> <small>{{imagesize(image, 'mime')}}</small></h4></div>
+									</div>
+									<div class="well well-sm">Other Information Available for Element:<br>
+										<ul>
+											<li><b>Bits:</b><small>{{imagesize(image, 'bits')}}</small></li>
+											<li><b>Channels:</b><small>{{imagesize(image, 'channels')}}</small></li>
+										</ul>
+									</div>
+
+								</div>
+							</div>	 
+						{% endfor %}
+						<hr>
+					{% else %}
+						{% for id,paragraphs in element %}
+							{% if paragraphs.string %}
+							<div class="media">
+								<div class="media-left media-middle">
+									<span class="glyphicon glyphicon-align-left" aria-hidden="true" style="font-size: 60px; padding: 20px 50px;"></span>
+								</div>
+								<div class="media-body">
+									<h3 class="media-heading">{{key}} - {{id + 1}}</h3>
+									<div class="row" style="min-width: 500px;">
+										<div class="col-xs-3"><h4><abbr title="Element Coordinates on the X Axis">x</abbr>
+											<small>{{paragraphs.x}}</small></h4>
+										</div>
+										<div class="col-xs-3"><h4><abbr title="Element Coordinates on the Y Axis">y</abbr> 
+											<small>{{paragraphs.y}}</small></h4></div>
+										<div class="col-xs-3"><h4><abbr title="Element Width">w</abbr> 
+											<small>{{paragraphs.width}}</small></h4></div>
+										<div class="col-xs-3"><h4><abbr title="Element Height">h</abbr> 
+											<small>{{paragraphs.height}}</small></h4></div>
+									</div>
+									<p>{{paragraphs.string | raw}}</p>
+									<div class="well well-sm">Other Information Available for Element:<br>
+										<ul>
+											<li><b>Font:</b><small>{{paragraphs.font}}</small></li>
+											<li><b>Size:</b><small>{{paragraphs.size}}</small></li>
+										</ul>
+									</div>
+
+								</div>
+							</div>
+							<hr>
+							{% endif %}
+						{% endfor %}
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
