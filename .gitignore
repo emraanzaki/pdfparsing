@@ -1,7 +1,6 @@
 # Ignore files
 #-----------------
 .DS_Store
-.phpintel/*
 
 # IDE Files
 #-------------------------
@@ -14,3 +13,4 @@
 *.stTheme.cache
 *.sublime-workspace
 *.sublime-project
+.phpintel/*
